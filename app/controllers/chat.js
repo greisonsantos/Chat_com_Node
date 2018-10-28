@@ -12,6 +12,10 @@ module.exports.inichat =function(application,req,res){
       	res.render("index",{validacao : erros}) //se tiver erros retorno para pagina do form
       	return;
       }
+      
+      //recurepando a variavel global declarada no app
+      application.get('io').emit('msgParaCliente',
+        {apelido: dadosForm.apelido, mensagem:'Acabou de entrar no chat'});
 
-      res.render("chat");
+      res.render("chat",{dadosForm: dadosForm});
 }
